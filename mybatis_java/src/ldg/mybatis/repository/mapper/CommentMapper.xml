@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+<!-- xml파일에 쿼리문 작성 -->
+<mapper namespace="ldg.mybatis.repository.mapper.CommentMapper">
+	<cache />
+	<sql id="BaseColumns">
+		comment_no AS commentNo,
+		user_id AS userId,
+		comment_content AS commentContent,
+		reg_date AS regDate
+	</sql>
+	<select id="selectCommentByPrimaryKey" parameterType="long" resultType="Comment">
+		SELECT
+			<include refid="BaseColumns" />
+			<!-- comment_no AS commentNo,
+			user_id AS userId,
+			comment_content AS commentContent,
+			reg_date AS regDate -->
+		FROM comment1
+		WHERE comment_no = #{commentNo}
+	</select>
+	<select id="selectCommentByCondition" parameterType="hashmap">
+		SELECT
+			<include refid="BaseColumns" />
+			<!-- comment_no AS commentNo,
+			user_id AS userId,
+			comment_content AS commentContent,
+			reg_date AS regDate -->
+		FROM comment1
+		<where>
+			<if test="commentNo != null">
+			comment_no = #{commentNo}
+			</if>
+		</where>
+	</select>
+</mapper>
